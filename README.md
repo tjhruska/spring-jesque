@@ -24,7 +24,7 @@ See unit tests for futher wiring examples
 
 Run Bean Jobs within Jesque
 ------------------
-By using BeanJobFactory (implementation of JobFactory), and BeanJob it is easy to configure beans jobs that con be executed as jesque jobs.  BeanJobFactory can materialize job from jesque to instances of Runnable or RunnableWithInit.
+By using BeanJobFactory (implementation of JobFactory), and BeanJob it is easy to configure beans jobs that can be executed as jesque jobs.  BeanJobFactory can materialize job from jesque to instances of Runnable or RunnableWithInit.
 
 Non bean jobs can also be executed by injecting an alternate JobFactory into the BeanJobFactory to handle the non bean jobs.  BeanJob can be used for easy enqueing of bean jobs into jesque.
 
@@ -40,7 +40,7 @@ Bean jobs can be any class that implements either Runnable or RunnableWithInit. 
 
 Distributed network of Jesque and Redis Servers
 ------------------
-For complex distributed jesque system JesqueJobTransporter has the ability of moving jobs from one redis database to another redis database.
+For complex distributed jesque systems JesqueJobTransporter has the ability to move jobs from one redis database to another redis database.
 
 ```java
 public JesqueJobTransporter(JedisPool sourceJedisPool, String sourceQueueName, JedisPool destJedisPool, 
