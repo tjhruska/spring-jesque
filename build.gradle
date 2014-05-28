@@ -1,0 +1,74 @@
+apply plugin: "java"
+apply plugin: "eclipse"
+apply plugin: "maven"
+
+group = 'com.tjhruska.spring.jesque'
+version = '1.0.0'
+
+sourceCompatibility=1.7
+
+def props = new Properties();
+def localProperties = new File("local.properties")
+if (localProperties.exists()) localProperties.withInputStream { props.load(it) }
+
+configurations {
+    deployerJars
+}
+
+ext {
+	springVersion = '4.0.4.RELEASE'
+}
+
+repositories {
+	mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	compile "org.springframework:spring-context:$springVersion"
+	compile "org.springframework:spring-core:$springVersion"
+	compile "org.springframework:spring-beans:$springVersion"
+
+
+	compile "redis.clients:jedis:2.4.1"
+	compile "net.greghaines:jesque:2.0.1-SNAPSHOT"
+ 
+	testCompile "org.springframework:spring-test:$springVersion"
+	testCompile 'junit:junit:4.11' 
+	testCompile "org.mockito:mockito-all:1.8.4"
+
+	testRuntime 'ch.qos.logback:logback-classic:1.1.1'
+
+	deployerJars 'org.apache.maven.wagon:wagon-ssh:2.1'
+}
+
+task packageJavadoc(type: Jar, dependsOn: 'javadoc') {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+task packageSources(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives packageJavadoc
+    archives packageSources
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            configuration = configurations.deployerJars
+            repository(url: props.get('maven.repository.url')) {
+                authentication(userName: props.get('maven.repository.user'), password: props.get('maven.repository.password'))
+            }
+        }
+    }
+}
+
+task createWrapper(type: Wrapper) {
+    gradleVersion = '1.0-milestone-6'
+}

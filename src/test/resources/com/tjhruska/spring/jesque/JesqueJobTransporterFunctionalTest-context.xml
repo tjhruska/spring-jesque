@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+        
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+        <property name="location" value="classpath:local_server.properties"/>
+    </bean>
+
+    <bean id="jedisPool1" class="redis.clients.jedis.JedisPool">
+        <constructor-arg>
+            <bean class="net.greghaines.jesque.utils.PoolUtils" factory-method="getDefaultPoolConfig" />
+        </constructor-arg>
+        <constructor-arg value="${redis.host}" />
+        <constructor-arg value="${redis.port}" />
+        <constructor-arg value="${redis.timeout}" />
+        <!--<constructor-arg value="${redis.password}" />-->
+    </bean>
+    
+    <bean id="jesqueConfig1" class="net.greghaines.jesque.ConfigBuilder" factory-method="getDefaultConfig" />
+    
+    <bean id="jesqueClient1" class="net.greghaines.jesque.client.ClientPoolImpl">
+        <constructor-arg ref="jesqueConfig1" />
+        <constructor-arg ref="jedisPool1" />
+    </bean>
+    
+    <context:annotation-config/>
+    <bean id="jedisPool2" class="redis.clients.jedis.JedisPool">
+        <constructor-arg>
+            <bean class="net.greghaines.jesque.utils.PoolUtils" factory-method="getDefaultPoolConfig" />
+        </constructor-arg>
+        <constructor-arg value="${redis.two.host}" />
+        <constructor-arg value="${redis.two.port}" />
+        <constructor-arg value="${redis.two.timeout}" />
+        <!--<constructor-arg value="${redis.two.password}" />-->
+    </bean>
+    
+    <bean id="jesqueConfig2" class="net.greghaines.jesque.Config">
+        <constructor-arg index="0" value="${redis.two.host}" />
+        <constructor-arg index="1" value="${redis.two.port}" />
+        <constructor-arg index="2" value="${redis.two.timeout}" />
+        <constructor-arg index="3"><null/></constructor-arg>
+        <constructor-arg index="4" value="resque" />
+        <constructor-arg index="5" value="0" />
+    </bean>
+    
+    <bean id="jesqueClient2" class="net.greghaines.jesque.client.ClientPoolImpl">
+        <constructor-arg ref="jesqueConfig2" />
+        <constructor-arg ref="jedisPool2" />
+    </bean>
+</beans>

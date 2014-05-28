@@ -1,0 +1,12 @@
+todo.txt
+backup
+.groovy
+.classpath
+.metadata
+.gradle
+.project
+.settings
+.DS_Store
+bin
+build
+local*.properties

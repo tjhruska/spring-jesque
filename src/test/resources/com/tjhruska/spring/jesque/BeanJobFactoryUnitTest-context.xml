@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+        
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+        <property name="location" value="classpath:local_server.properties"/>
+    </bean>
+    
+    <bean id="beanJobFactory" class="com.tjhruska.spring.jesque.BeanJobFactory" />
+    
+    <bean id="testBeanJob" class="com.tjhruska.spring.jesque.testJobs.TestBeanJob" scope="prototype" />
+    <bean id="testInitializingBeanJob" class="com.tjhruska.spring.jesque.testJobs.TestInitializingBeanJob" scope="prototype" />
+    <bean id="testSingletonBeanJob" class="com.tjhruska.spring.jesque.testJobs.TestBeanJob" />
+</beans>
