@@ -7,6 +7,9 @@ backup
 .project
 .settings
 .DS_Store
+*.ipr
+*.iml
+*.iws
 bin
 build
 local*.properties

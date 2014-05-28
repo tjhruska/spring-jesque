@@ -1,6 +1,6 @@
 SpringJesque
 ==================
-SpringJesque supports the integration of the Jesque project into your existing Spring application.  It depends on Jesque version 2.0.1 or greater.  Jesque has added support for JobFactories which allow for the injection of behavior on how to materialize jobs.  These changes have allowed for utilization of bean jobs without having to make any changes to the existing Jesque Worker classes.
+SpringJesque supports the integration of the [Jesque](https://github.com/gresrun/jesque) project into your existing Spring application.  It depends on Jesque version 2.0.1 or greater.  Jesque has added support for JobFactories which allow for the injection of behavior on how to materialize jobs.  These changes have allowed for utilization of bean jobs without having to make any changes to the existing Jesque Worker classes.
 
 Configuring Jesque to run within Spring Context Life-cycle Manager
 ------------------
