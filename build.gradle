@@ -3,8 +3,8 @@ apply plugin: "eclipse"
 apply plugin: "idea"
 apply plugin: "maven"
 
-group = 'com.tjhruska.spring.jesque'
-version = '1.0.0'
+group = 'com.tjhruska.spring'
+version = '1.0.1'
 
 sourceCompatibility=1.7
 
