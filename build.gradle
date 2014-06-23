@@ -4,7 +4,7 @@ apply plugin: "idea"
 apply plugin: "maven"
 
 group = 'com.tjhruska.spring'
-version = '1.0.1'
+version = '1.0.2'
 
 sourceCompatibility=1.7
 
@@ -32,7 +32,7 @@ dependencies {
 
 
 	compile "redis.clients:jedis:2.4.1"
-	compile "net.greghaines:jesque:2.0.1-SNAPSHOT"
+	compile "net.greghaines:jesque:2.0.1-Fixed"
  
 	testCompile "org.springframework:spring-test:$springVersion"
 	testCompile 'junit:junit:4.11' 

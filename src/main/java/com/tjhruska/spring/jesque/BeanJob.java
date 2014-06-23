@@ -24,7 +24,7 @@ import net.greghaines.jesque.Job;
 /**
  * BeanJob can be used to enqueue jobs into a JesqueClient.
  * This class is a convenience class for setting the class of the BeanJob.
- * You can just enqueue a Job with the class being BeanJobRunner to get the same effect.
+ * You can just enqueue a Job with the class set to BeanJob to get the same effect.
  * 
  * @author Timothy Hruska <https://github.com/tjhruska>
  *
