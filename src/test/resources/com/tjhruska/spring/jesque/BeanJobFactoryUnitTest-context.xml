@@ -13,6 +13,7 @@
     <bean id="beanJobFactory" class="com.tjhruska.spring.jesque.BeanJobFactory" />
     
     <bean id="testBeanJob" class="com.tjhruska.spring.jesque.testJobs.TestBeanJob" scope="prototype" />
+    <bean id="testBeanJobCallable" class="com.tjhruska.spring.jesque.testJobs.TestBeanJobCallable" scope="prototype" />
     <bean id="testInitializingBeanJob" class="com.tjhruska.spring.jesque.testJobs.TestInitializingBeanJob" scope="prototype" />
     <bean id="testSingletonBeanJob" class="com.tjhruska.spring.jesque.testJobs.TestBeanJob" />
 </beans>
