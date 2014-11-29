@@ -44,7 +44,7 @@ public class BeanJobFactory implements JobFactory, ApplicationContextAware {
 
   /**
    * Construct a BeanJobFactory that can only materialize BeanJobs. Bean jobs
-   * must implement either Runnable, and RunnableWithInit.
+   * must implement either Runnable, Callable, or RunnableWithInit.
    */
   public BeanJobFactory() {
     super();
@@ -52,9 +52,24 @@ public class BeanJobFactory implements JobFactory, ApplicationContextAware {
   }
 
   /**
+   * Construct a BeanJobFactory that can only materialize BeanJobs. Bean jobs
+   * must implement either Runnable, Callable, or RunnableWithInit. Jobs will be
+   * wrapped by a proxy class that will log around the job, and will
+   * additionally log exceptions thrown by the job.
+   *
+   * @param addLoggingProxy
+   *          used to cause returned jobs to be a logging proxy that will log
+   *          before and after job run
+   */
+  public BeanJobFactory(boolean addLoggingProxy) {
+    super();
+    this.addLoggingProxy = addLoggingProxy;
+  }
+
+  /**
    * Construct a BeanJobFactory that can materialize BeanJobs, or fallback to
-   * the fallbackJobFactory for other jobs. Bean jobs must implement either
-   * Runnable, and RunnableWithInit.
+   * the fallbackJobFactory for other jobs. Bean jobs must implement Runnable,
+   * Callable, or RunnableWithInit.
    *
    * @param fallbackJobFactory
    *          used to materialize jobs that were not enqueued as BeanJobs.
@@ -67,8 +82,8 @@ public class BeanJobFactory implements JobFactory, ApplicationContextAware {
 
   /**
    * Construct a BeanJobFactory that can materialize BeanJobs, or fallback to
-   * the fallbackJobFactory for other jobs. Bean jobs must implement either
-   * Runnable, and RunnableWithInit.
+   * the fallbackJobFactory for other jobs. Bean jobs must implement Runnable,
+   * Callable, or RunnableWithInit.
    *
    * @param fallbackJobFactory
    *          used to materialize jobs that were not enqueued as BeanJobs.
@@ -84,6 +99,14 @@ public class BeanJobFactory implements JobFactory, ApplicationContextAware {
 
   public void setFallbackJobFactory(JobFactory fallbackJobFactory) {
     this.fallbackJobFactory = fallbackJobFactory;
+  }
+
+  public JobFactory getFallbackJobFactory() {
+    return fallbackJobFactory;
+  }
+
+  public boolean getAddLoggingProxy() {
+    return addLoggingProxy;
   }
 
   public void setAddLoggingProxy(boolean addLoggingProxy) {

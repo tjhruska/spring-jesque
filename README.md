@@ -2,7 +2,7 @@ SpringJesque
 ==================
 SpringJesque supports the integration of the [Jesque](https://github.com/gresrun/jesque) project into your existing Spring application.  It depends on Jesque version 2.0.1 or greater.  Jesque has added support for JobFactories which allow for the injection of behavior on how to materialize jobs.  These changes have allowed for utilization of bean jobs without having to make any changes to the existing Jesque Worker classes.
 
-With SpringJesque v1.0.3 LoggingProxy[Runnable|Callable] has been added as a possible wrapper to the jobs materialized using the BeanJobFactory.  This will allow for logging start and stopping of jobs with timings, as well as logging of the exception when a job throws an exception.
+With SpringJesque v1.0.3 LoggingProxy[Runnable|Callable] has been added as a possible wrapper to the jobs materialized using the BeanJobFactory.  This will allow for logging the starting and stopping of jobs with timings, as well as logging of the exception when a job throws an exception.
 
 Configuring Jesque to run within Spring Context Life-cycle Manager
 ------------------
@@ -26,11 +26,11 @@ See unit tests for futher wiring examples
 
 Run Bean Jobs within Jesque
 ------------------
-By using BeanJobFactory (implementation of JobFactory), and BeanJob it is easy to configure beans jobs that can be executed as jesque jobs.  BeanJobFactory can materialize job from jesque to instances of Runnable or RunnableWithInit.
+By using BeanJobFactory (implementation of JobFactory), and BeanJob it is easy to configure beans jobs that can be executed as jesque jobs.  BeanJobFactory can materialize job from jesque to instances of Runnable, Callable, or RunnableWithInit.
 
 Non bean jobs can also be executed by injecting an alternate JobFactory into the BeanJobFactory to handle the non bean jobs.  BeanJob can be used for easy enqueing of bean jobs into jesque.
 
-Bean jobs can be any class that implements either Runnable or RunnableWithInit.  RunnableWithInit is an interface that BeanJobFactory can use to load arguments into the bean job before execution.
+Bean jobs can be any class that implements either Runnable, Callable, or RunnableWithInit.  RunnableWithInit is an interface that BeanJobFactory can use to load arguments into the bean job before execution.
 
 ```xml
 <bean id="beanJobFactory" class="com.tjhruska.spring.jesque.BeanJobFactory" /> <!-- inject a fallbackJobFactory to also handle non bean jobs -->
