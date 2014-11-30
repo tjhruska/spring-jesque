@@ -57,10 +57,10 @@
     <bean id="jesqueServer" class="com.tjhruska.spring.jesque.SpringConfiguredJesqueServer">
         <constructor-arg>
             <list>
-                <bean class="com.tjhruska.spring.jesque.JesqueContainer">
+                <bean id="jesqueContainer1" class="com.tjhruska.spring.jesque.JesqueContainer">
                     <constructor-arg ref="workerImplFactory1" />
                 </bean>
-                <bean class="com.tjhruska.spring.jesque.JesqueContainer">
+                <bean id="jesqueContainer2" class="com.tjhruska.spring.jesque.JesqueContainer">
                     <constructor-arg ref="workerImplFactory2" />
                 </bean>
             </list>

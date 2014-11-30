@@ -136,9 +136,10 @@ public class JesqueContainer implements BeanNameAware {
     for (int i = 0; i < maxWorkerCount; i++) {
       if (workerThreads[i] != null && workerThreads[i].isAlive()) {
         if (paused) {
-          log.info("pausing worker(s) '{}' with queues '{}'", workers[i].getName(), workers[i].getQueues());
+          log.info(beanName + " pausing worker(s) '{}' with queues '{}'", workers[i].getName(), workers[i].getQueues());
         } else {
-          log.info("unpausing worker(s) '{}' with queues '{}'", workers[i].getName(), workers[i].getQueues());
+          log.info(beanName + " unpausing worker(s) '{}' with queues '{}'", workers[i].getName(),
+              workers[i].getQueues());
         }
         workers[i].togglePause(paused);
       }
@@ -155,7 +156,7 @@ public class JesqueContainer implements BeanNameAware {
   public void stop(boolean now) {
     for (int i = 0; i < maxWorkerCount; i++) {
       if (workerThreads[i] != null && workerThreads[i].isAlive()) {
-        log.info("stopping worker(s) '{}' with queues '{}'", workers[i].getName(), workers[i].getQueues());
+        log.info(beanName + " stopping worker(s) '{}' with queues '{}'", workers[i].getName(), workers[i].getQueues());
         workers[i].end(now);
       }
     }
@@ -172,7 +173,8 @@ public class JesqueContainer implements BeanNameAware {
   public void join(long millis) throws InterruptedException {
     for (int i = 0; i < maxWorkerCount; i++) {
       if (workerThreads[i] != null && workerThreads[i].isAlive()) {
-        log.info("joinging against worker(s) '{}' with queues '{}'", workers[i].getName(), workers[i].getQueues());
+        log.info(beanName + " joinging against worker(s) '{}' with queues '{}'", workers[i].getName(),
+            workers[i].getQueues());
         workers[i].join(millis);
       }
     }

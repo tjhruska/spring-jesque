@@ -84,7 +84,7 @@ public class SpringConfiguredJesqueServer extends Thread implements Initializing
    */
   @Override
   public void afterPropertiesSet() throws Exception {
-    log.info("Starting jesque server.");
+    log.info("Starting jesque server " + beanName + ".");
     shutdown = false;
     this.setDaemon(false);
     start();
@@ -98,7 +98,7 @@ public class SpringConfiguredJesqueServer extends Thread implements Initializing
    */
   @Override
   public void destroy() {
-    log.info("Stopping jesque server.");
+    log.info("Stopping jesque server " + beanName + ".");
 
     for (JesqueContainer jesqueContainer : jesqueContainers) {
       jesqueContainer.stop(false);
